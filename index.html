@@ -1,73 +1,121 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, viewport-fit=cover"
-    />
-    <meta name="theme-color" content="#0e0e0d" />
-    <meta name="mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta
-      name="apple-mobile-web-app-status-bar-style"
-      content="black-translucent"
-    />
-    <title>FilmLab</title>
-    <link rel="stylesheet" href="./style.css" />
-  </head>
-  <body>
-    <div id="app">
-      <header>
-        <h1>Film<b>Lab</b></h1>
-        <button id="fs" title="Fullscreen">⛶</button
-        ><button id="rot" disabled title="Rotate">↻</button
-        ><button id="open">Open</button
-        ><button id="save" class="p" disabled>Save</button>
-      </header>
-      <div id="stage">
-        <canvas id="c"></canvas>
-        <div id="empty">
-          <div style="font-size: 42px">🎞️</div>
-          <div>VSCO Film 01 + Studio looks</div>
-          <button class="p" id="open2">Choose a photo</button
-          ><small
-            >JPG, PNG, WebP or RAW (CR2, CR3, NEF, ARW, DNG, RAF, ORF,
-            RW2…)</small
-          >
-        </div>
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#0e0e0d" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <title>FilmLab</title>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+
+<body>
+  <div id="app">
+    <header>
+      <h1>FILM<span>LAB</span></h1>
+      <div class="header-actions">
+        <button id="cmp" disabled title="Hold to compare original">Before</button>
+        <button id="rot" disabled title="Rotate">↻</button>
+        <button id="fs" title="Fullscreen">⛶</button>
+        <button id="open">Open</button>
+        <button id="save" class="p" disabled>Save</button>
       </div>
-      <div id="panel">
-        <div class="tabs">
-          <button data-g="Kodak" class="on">Kodak</button
-          ><button data-g="Fuji">Fuji</button
-          ><button data-g="Ilford">Ilford</button
-          ><button data-g="Studio">Studio</button><span class="sp"></span
-          ><button id="cmp" disabled>Before</button
-          ><button id="adjb">Adjust</button>
+    </header>
+    <div id="stage">
+      <canvas id="c"></canvas>
+      <div id="empty">
+        <div class="empty-mark">F</div>
+        <div>Make the moment yours.</div>
+        <button class="p" id="open2">Choose a photo</button>
+        <!-- <small>JPG, PNG, WebP or RAW (CR2, CR3, NEF, ARW, DNG, RAF,
+          ORF,
+          RW2…)</small> -->
+      </div>
+    </div>
+    <div id="panel">
+      <nav class="workspace-tabs" aria-label="Editing tools">
+        <button class="on" data-view="looks">Looks</button>
+        <button data-view="edit">Edit</button>
+      </nav>
+      <section id="looks-view" class="workspace">
+        <div class="section-heading">
+          <div>
+            <span class="eyebrow">PRESETS</span>
+          </div>
+          <div class="vars" aria-label="Filter strength">
+            <span>Strength</span>
+            <div id="variant-options"></div>
+          </div>
         </div>
-        <div class="vars">
-          Strength <button data-v="-">−</button
-          ><button data-v="" class="on">•</button><button data-v="+">+</button
-          ><button data-v="++">++</button>
+        <div class="tabs" aria-label="Film collections">
+          <button data-g="All" class="on">All presets</button>
+          <button data-g="Kodak">Kodak</button>
+          <button data-g="Fujifilm">Fujifilm</button>
+          <button data-g="Agfa">Agfa</button>
+          <button data-g="Instant">Instant</button>
+          <button data-g="Ilford">Ilford</button>
         </div>
         <div id="strip"></div>
-        <div id="adj"></div>
-      </div>
+      </section>
+      <section id="edit-view" class="workspace" hidden>
+        <div class="section-heading edit-heading">
+          <div>
+            <span class="eyebrow">FINE-TUNE</span>
+          </div>
+          <button id="reset-edit" class="text-button">Reset</button>
+        </div>
+        <nav id="edit-categories" aria-label="Edit categories">
+          <button class="on" data-category="light">Light</button>
+          <button data-category="color">Color</button>
+          <button data-category="hsl">HSL</button>
+          <button data-category="curve">Tone curve</button>
+          <button data-category="grading">Color grade</button>
+          <button data-category="effects">Effects</button>
+          <button data-category="detail">Detail</button>
+        </nav>
+        <div id="edit-panels">
+          <section class="edit-category" data-edit-category-panel="light">
+            <div id="light-controls"></div>
+          </section>
+          <section class="edit-category" data-edit-category-panel="color" hidden>
+            <div id="color-controls"></div>
+          </section>
+          <section class="edit-category" data-edit-category-panel="hsl" hidden>
+            <section class="hsl-editor" aria-label="HSL color controls">
+              <div id="hsl-swatches" class="hsl-swatches" aria-label="Select a color"></div>
+              <div id="hsl-controls"></div>
+            </section>
+          </section>
+          <section class="edit-category" data-edit-category-panel="curve" hidden>
+            <div id="curve-controls"></div>
+          </section>
+          <section class="edit-category" data-edit-category-panel="grading" hidden>
+            <div id="grading-controls"></div>
+          </section>
+          <section class="edit-category" data-edit-category-panel="effects" hidden>
+            <div id="effects-controls"></div>
+          </section>
+          <section class="edit-category" data-edit-category-panel="detail" hidden>
+            <div id="detail-controls"></div>
+          </section>
+        </div>
+      </section>
     </div>
-    <div id="ov">
-      <img id="oi" alt="Edited photo" />
-      <div>On iPhone, tap “Share / Save” or press and hold the photo.</div>
-      <button id="share" class="p">Share / Save image</button
-      ><button id="oc">Close</button>
-    </div>
-    <div id="toast"></div>
-    <input
-      type="file"
-      id="file"
-      accept="image/*,.dng,.cr2,.cr3,.crw,.nef,.nrw,.arw,.srf,.sr2,.raf,.orf,.rw2,.pef,.srw,.x3f,.3fr,.iiq,.rwl,.erf,.kdc,.mrw"
-      hidden
-    />
-    <script src="./main.js"></script>
-  </body>
+  </div>
+  <div id="ov">
+    <img id="oi" alt="Edited photo" />
+    <div>On iPhone, tap “Share / Save” or press and hold the photo.</div>
+    <button id="share" class="p">Share / Save image</button><button id="oc">Close</button>
+  </div>
+  <div id="toast"></div>
+  <input type="file" id="file"
+    accept="image/*,.dng,.cr2,.cr3,.crw,.nef,.nrw,.arw,.srf,.sr2,.raf,.orf,.rw2,.pef,.srw,.x3f,.3fr,.iiq,.rwl,.erf,.kdc,.mrw"
+    hidden />
+  <script src="./film-presets.js"></script>
+  <script src="./main.js"></script>
+</body>
+
 </html>
