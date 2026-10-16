@@ -871,12 +871,15 @@ function strip() {
     d.dataset.series = F.series;
     d.style.setProperty(
       "--preset-color",
-      ({ Kodak: "#d8bd8f", Fujifilm: "#a8c49e", Agfa: "#d6a09a", Instant: "#d0b0c6", Ilford: "#aeb9c8" })[F.family] || "#bbb",
+      ({ Kodak: "#C75B39", Fujifilm: "#1C684C", Agfa: "#C84630", Instant: "#E3A333", Ilford: "#2B2B2B" })[F.family] || "#bbb",
     );
     const c = document.createElement("canvas");
     c.width = c.height = 72;
     const label = document.createElement("div");
-    label.textContent = F.n;
+    label.textContent = F.n
+      .replace(/\b[A-Za-z]+\b/g, (part) => part[0].toUpperCase())
+      .replace(/(?<=[A-Za-z]) (?=[A-Za-z])/g, "");
+    label.title = F.n;
     d.append(c, label);
     d.title = `${F.family} · ${F.folder}`;
     c.dataset.g = grp;

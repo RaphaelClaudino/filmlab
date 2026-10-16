@@ -14,6 +14,8 @@
   box-sizing: border-box;
   padding-top: env(safe-area-inset-top, 0px);
   padding-bottom: env(safe-area-inset-bottom, 0px);
+
+  --font-lable-films: "League Spartan", sans-serif;
 }
 
 * {
@@ -295,21 +297,24 @@ canvas#c {
   color: var(--ink);
 }
 
-.f > div {
-  display: -webkit-box;
-  min-height: 27px;
-  margin-top: 4px;
-  padding: 4px 3px;
+.f>div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 25px;
+  margin-top: 0px;
+  padding: 3px 2px;
   overflow: hidden;
-  border-radius: 4px;
+  text-align: center;
+  border-radius: 0px;
   background: var(--preset-color);
-  color: #171717;
-  font-size: 9px;
-  font-weight: 600;
-  line-height: 1.25;
-  overflow-wrap: anywhere;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
+  color: #ffffff;
+  font-family: var(--font-lable-films);
+  font-size: 10px;
+  font-weight: 800;
+  line-height: 14px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 #adj {
@@ -527,7 +532,7 @@ canvas#c {
   letter-spacing: -0.08em;
 }
 
-#empty > div:nth-child(2) {
+#empty>div:nth-child(2) {
   color: #ddd;
   font-size: 14px;
   font-weight: 400;
@@ -620,7 +625,7 @@ canvas#c {
   font-size: 11px;
 }
 
-.vars > span {
+.vars>span {
   margin-right: 5px;
 }
 
@@ -682,7 +687,7 @@ canvas#c {
 .f canvas {
   width: 66px;
   height: 66px;
-  margin-bottom: 5px;
+  margin-bottom: 0px;
   border: 1px solid transparent;
   border-radius: 2px;
   box-shadow: none;
@@ -753,13 +758,11 @@ canvas#c {
 .r input[type="range"] {
   height: 2px;
   border-radius: 0;
-  background: linear-gradient(
-    to right,
-    #eee 0%,
-    #eee var(--range-progress, 50%),
-    #4b4b4b var(--range-progress, 50%),
-    #4b4b4b 100%
-  );
+  background: linear-gradient(to right,
+      #eee 0%,
+      #eee var(--range-progress, 50%),
+      #4b4b4b var(--range-progress, 50%),
+      #4b4b4b 100%);
   box-shadow: none;
   touch-action: pan-y;
 }
@@ -808,7 +811,7 @@ canvas#c {
   margin-bottom: 10px;
 }
 
-.hsl-heading > span {
+.hsl-heading>span {
   color: #aaa;
   font-size: 11px;
 }
