@@ -1566,6 +1566,13 @@
           }),
       );
       const adj = $("#adj");
+      const setRangeFill = (input) => {
+        const min = Number(input.min || 0);
+        const max = Number(input.max || 100);
+        const value = Number(input.value || 0);
+        const percent = ((value - min) / (max - min || 1)) * 100;
+        input.style.setProperty("--range-progress", percent + "%");
+      };
       ADJ.forEach(([k, n, mn, mx, df]) => {
         const r = document.createElement("div");
         r.className = "r";
@@ -1583,9 +1590,11 @@
           "</span>";
         const i = r.children[1],
           sp = r.children[2];
+        setRangeFill(i);
         i.oninput = () => {
           U[k] = +i.value;
           sp.textContent = i.value;
+          setRangeFill(i);
           render();
         };
         i.ondblclick = () => {
@@ -1624,6 +1633,7 @@
         c.width = w;
         c.height = h;
         c.getContext("2d").putImageData(out, 0, 0);
+        const exportQuality = 1;
         c.toBlob(
           async (blob) => {
             b.disabled = false;
@@ -1659,7 +1669,7 @@
             $("#ov").style.display = "flex";
           },
           "image/jpeg",
-          0.94,
+          exportQuality,
         );
       };
       $("#share").onclick = async () => {
