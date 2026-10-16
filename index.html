@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <meta name="theme-color" content="#0e0e0d" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <title>FilmLab</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div id="app">
+      <header>
+        <h1>Film<b>Lab</b></h1>
+        <button id="fs" title="Fullscreen">⛶</button
+        ><button id="rot" disabled title="Rotate">↻</button
+        ><button id="open">Open</button
+        ><button id="save" class="p" disabled>Save</button>
+      </header>
+      <div id="stage">
+        <canvas id="c"></canvas>
+        <div id="empty">
+          <div style="font-size: 42px">🎞️</div>
+          <div>VSCO Film 01 + Studio looks</div>
+          <button class="p" id="open2">Choose a photo</button
+          ><small
+            >JPG, PNG, WebP or RAW (CR2, CR3, NEF, ARW, DNG, RAF, ORF,
+            RW2…)</small
+          >
+        </div>
+      </div>
+      <div id="panel">
+        <div class="tabs">
+          <button data-g="Kodak" class="on">Kodak</button
+          ><button data-g="Fuji">Fuji</button
+          ><button data-g="Ilford">Ilford</button
+          ><button data-g="Studio">Studio</button><span class="sp"></span
+          ><button id="cmp" disabled>Before</button
+          ><button id="adjb">Adjust</button>
+        </div>
+        <div class="vars">
+          Strength <button data-v="-">−</button
+          ><button data-v="" class="on">•</button><button data-v="+">+</button
+          ><button data-v="++">++</button>
+        </div>
+        <div id="strip"></div>
+        <div id="adj"></div>
+      </div>
+    </div>
+    <div id="ov">
+      <img id="oi" alt="Edited photo" />
+      <div>On iPhone, tap “Share / Save” or press and hold the photo.</div>
+      <button id="share" class="p">Share / Save image</button
+      ><button id="oc">Close</button>
+    </div>
+    <div id="toast"></div>
+    <input
+      type="file"
+      id="file"
+      accept="image/*,.dng,.cr2,.cr3,.crw,.nef,.nrw,.arw,.srf,.sr2,.raf,.orf,.rw2,.pef,.srw,.x3f,.3fr,.iiq,.rwl,.erf,.kdc,.mrw"
+      hidden
+    />
+    <script src="./main.js"></script>
+  </body>
+</html>
